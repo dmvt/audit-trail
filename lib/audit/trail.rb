@@ -1,7 +1,5 @@
 require "audit/trail/version"
+require "audit/trail/inflection"
 
-module Audit
-  module Trail
-    # Your code goes here...
-  end
-end
+require "audit/trail/adapter"
+require "audit/trail/config"
