@@ -15,6 +15,17 @@ module Audit
         adapter
       end
 
+      def to_hsh
+        {}.tap { |config|
+          config[:adapter] = adapter.namespace
+          adapter.config.each do |attr, _|
+            cvar = adapter.config_var(attr)
+            config[cvar.to_sym] = send(cvar)
+          end
+        }
+      end
+      alias :to_h :to_hsh
+
       private
 
       def add_config_option(name:, default_value:)

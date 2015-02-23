@@ -20,7 +20,7 @@ module Audit
         config.each do |remote_name, default_value|
           context.send(
             :add_config_option,
-            name: "#{name(:underscore)}_#{remote_name}",
+            name: config_var(remote_name),
             default_value: default_value
           )
         end
@@ -37,6 +37,10 @@ module Audit
           Audit::Trail::Adapter::NotImplementedError,
           "#{namespace}#config must be implemented"
         )
+      end
+
+      def config_var(remote_name)
+        "#{name(:underscore)}_#{remote_name}"
       end
 
       private
